@@ -1,0 +1,2 @@
+# PomiaryDesktop
+Pomiary desktop version
