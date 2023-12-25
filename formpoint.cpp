@@ -5,6 +5,7 @@
 
 
 const auto roundFactor = 0.1;
+const auto errorEpsilon = roundFactor / 2;
 
 
 FormPoint::FormPoint(QWidget *parent) :
@@ -63,7 +64,7 @@ PointData const& FormPoint::getPointData() const
 
 static bool isValidPoint(PointRange const& range, double value)
 {
-    return ((std::abs(value - range.m_zero) - range.m_error) < roundFactor);
+    return ((std::abs(value - range.m_zero) - range.m_error) < errorEpsilon);
 }
 
 
