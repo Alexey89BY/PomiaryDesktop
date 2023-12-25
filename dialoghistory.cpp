@@ -5,7 +5,7 @@
 #include "globals.h"
 
 
-const char delimiter = ';';
+const char delimiter = ',';
 const char* dirHistory = "history";
 
 
