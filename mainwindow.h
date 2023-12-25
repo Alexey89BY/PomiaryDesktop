@@ -7,6 +7,7 @@
 #include <QCamera>
 #include <QCloseEvent>
 #include <QScopedPointer>
+#include <QSerialPort>
 #include "formpoint.h"
 #include "pointrange.h"
 
@@ -36,6 +37,7 @@ private slots:
     void on_buttonSettings_clicked();
     void slot_dialogSettings_accepted();
     void slot_timerRefreshCoordX_timeout();
+    void slot_serialPort_readyRead();
 
 private:
     Ui::MainWindow *ui;
@@ -43,9 +45,12 @@ private:
     QList<FormPoint*> widgetsPointsP6;
     QList<FormPoint*> widgetsPointsP7;
     QScopedPointer<QCamera> m_camera;
+    QScopedPointer<QSerialPort> m_serialport;
 
     void setCamera(QString const& deviceName);
+    void setSerialPort(QString const& portName);
     void refreshCoordX();
+    void pollSerialPort();
     void setPointsTitles(QList<FormPoint*> const &widgetsPoints, QStringList const& titles);
     void setPointsRanges(QList<FormPoint*> const &widgetsPoints, QList<PointRange> const &rangesPoints);
     void clearPoints(QList<FormPoint*> const &widgetsPoints);

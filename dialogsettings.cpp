@@ -15,17 +15,17 @@ DialogSettings::DialogSettings(QWidget *parent) :
     ui->setupUi(this);
 
     ui->comboCamera->addItem(tr("*** default camera ***"), QString());
-
     auto listCameraInfos = QCameraInfo::availableCameras();
     for (auto&& cameraInfo: listCameraInfos)
     {
         ui->comboCamera->addItem(cameraInfo.description(), cameraInfo.deviceName());
     }
 
+    ui->comboSerialPort->addItem(tr("*** disconnected ***"));
     auto listSerialPorts = QSerialPortInfo::availablePorts();
     for (auto&& portInfo: listSerialPorts)
     {
-        ui->comboSerialPort->addItem(portInfo.portName());
+        ui->comboSerialPort->addItem(portInfo.description(), portInfo.portName());
     }
 
     widgetsRangesStandardP6 << ui->widgetRangeStandardP6_1 << ui->widgetRangeStandardP6_2 << ui->widgetRangeStandardP6_3
@@ -69,5 +69,11 @@ DialogSettings::~DialogSettings()
 QString DialogSettings::getCameraDeviceName() const
 {
     return (ui->comboCamera->currentData().toString());
+}
+
+
+QString DialogSettings::getSerialPortName() const
+{
+    return (ui->comboSerialPort->currentData().toString());
 }
 

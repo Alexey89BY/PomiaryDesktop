@@ -28,10 +28,12 @@ MainWindow::MainWindow(QWidget *parent)
     setPointsTitles(widgetsPointsP6, Globals::pointsP6Titles);
     setPointsTitles(widgetsPointsP7, Globals::pointsP7Titles);
     ui->comboNewSealType->addItems(Globals::titlesSeals);
+    ui->comboNewSealType->view()->
 
     Settings::load();
 
     setCamera(QString());
+    setSerialPort(QString());
 
     connect(&timerRefreshCoordX, &QTimer::timeout, this, &MainWindow::slot_timerRefreshCoordX_timeout);
     timerRefreshCoordX.start(500);
@@ -46,14 +48,68 @@ MainWindow::~MainWindow()
 
 void MainWindow::setCamera(QString const& deviceName)
 {
+    ui->stackedWidgetCamera->setCurrentWidget(ui->pageCameraError);
+    ui->labelCameraError->clear();
+
     auto deviceNameLatin1 = (deviceName.isEmpty())
         ? QCameraInfo::defaultCamera().deviceName().toLatin1()
         : deviceName.toLatin1();
     m_camera.reset(new QCamera(deviceNameLatin1));
 
+    //connect(m_camera.get(), &QCamera::errorOccurred ...
     m_camera->setViewfinder(ui->widgetViewFinder);
     m_camera->setCaptureMode(QCamera::CaptureViewfinder);
     m_camera->start();
+
+    if (m_camera->error() == QCamera::NoError)
+    {
+        ui->stackedWidgetCamera->setCurrentWidget(ui->pageCameraViewFinder);
+    }
+    else
+    {
+        ui->labelCameraError->setText(m_camera->errorString());
+    }
+}
+
+
+void MainWindow::setSerialPort(QString const& portName)
+{
+    m_serialport.reset(new QSerialPort(portName));
+
+    m_serialport->setBaudRate(9600);
+    m_serialport->setDataBits(QSerialPort::Data8);
+    m_serialport->setStopBits(QSerialPort::OneStop);
+    m_serialport->setParity(QSerialPort::NoParity);
+    connect(m_serialport.get(), &QSerialPort::readyRead, this, &MainWindow::slot_serialPort_readyRead);
+
+    if (m_serialport->open(QIODevice::ReadWrite))
+    {
+
+    }
+    else
+    {
+
+    }
+}
+
+
+
+void MainWindow::slot_serialPort_readyRead()
+{
+    auto serialPort = qobject_cast<QSerialPort*>(sender());
+    auto data = serialPort->readAll();
+}
+
+
+
+void MainWindow::pollSerialPort()
+{
+    if (! m_serialport->isOpen())
+    {
+        return;
+    }
+
+    m_serialport->write("test");
 }
 
 
@@ -142,6 +198,8 @@ void MainWindow::slot_timerRefreshCoordX_timeout()
 {
     currentCoordX += rand() / 5000.0;
     refreshCoordX();
+
+    pollSerialPort();
 }
 
 
@@ -264,5 +322,6 @@ void MainWindow::slot_dialogSettings_accepted()
     Settings::save();
 
     setCamera(dialog->getCameraDeviceName());
+    setSerialPort(dialog->getSerialPortName());
 }
 

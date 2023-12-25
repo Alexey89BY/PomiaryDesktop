@@ -17,6 +17,7 @@ public:
     ~DialogSettings();
 
     QString getCameraDeviceName() const;
+    QString getSerialPortName() const;
 
 private:
     Ui::DialogSettings *ui;

@@ -12,7 +12,7 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>10</pointsize>
+    <pointsize>11</pointsize>
    </font>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
     <property name="horizontalSpacing">
      <number>9</number>
     </property>
-    <item row="0" column="1" rowspan="2">
+    <item row="0" column="2" rowspan="2">
      <widget class="QFrame" name="frame_8">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Maximum" vsizetype="Preferred">
@@ -94,7 +94,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>14</pointsize>
+              <pointsize>16</pointsize>
              </font>
             </property>
             <property name="frameShape">
@@ -152,7 +152,7 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_4">
              <property name="spacing">
-              <number>8</number>
+              <number>12</number>
              </property>
              <property name="leftMargin">
               <number>0</number>
@@ -324,7 +324,7 @@
             </property>
             <layout class="QVBoxLayout" name="verticalLayout_5">
              <property name="spacing">
-              <number>8</number>
+              <number>12</number>
              </property>
              <property name="leftMargin">
               <number>0</number>
@@ -416,30 +416,46 @@
      </widget>
     </item>
     <item row="1" column="0">
-     <widget class="QFrame" name="frame">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
+     <widget class="QStackedWidget" name="stackedWidgetCamera">
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
       </property>
-      <layout class="QVBoxLayout" name="verticalLayout_3">
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>6</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QCameraViewfinder" name="widgetViewFinder" native="true"/>
-       </item>
-      </layout>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="pageCameraError">
+       <layout class="QVBoxLayout" name="verticalLayout_6">
+        <item>
+         <widget class="QLabel" name="labelCameraError">
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="pageCameraViewFinder">
+       <layout class="QVBoxLayout" name="verticalLayout_3">
+        <property name="leftMargin">
+         <number>0</number>
+        </property>
+        <property name="topMargin">
+         <number>0</number>
+        </property>
+        <property name="rightMargin">
+         <number>0</number>
+        </property>
+        <property name="bottomMargin">
+         <number>0</number>
+        </property>
+        <item>
+         <widget class="QCameraViewfinder" name="widgetViewFinder" native="true"/>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
     <item row="0" column="0">
@@ -474,11 +490,11 @@
        </property>
        <item>
         <widget class="QPushButton" name="buttonSettings">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="text">
           <string>Settings...</string>
@@ -487,11 +503,11 @@
        </item>
        <item>
         <widget class="QPushButton" name="buttonHistory">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>50</height>
-          </size>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
          </property>
          <property name="text">
           <string>History...</string>
@@ -533,7 +549,7 @@
          <property name="minimumSize">
           <size>
            <width>300</width>
-           <height>0</height>
+           <height>50</height>
           </size>
          </property>
          <property name="font">
@@ -594,6 +610,12 @@
           </property>
           <item>
            <widget class="QComboBox" name="comboNewSealType">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
             <property name="font">
              <font>
               <pointsize>11</pointsize>
@@ -603,11 +625,11 @@
           </item>
           <item>
            <widget class="QPushButton" name="buttonNewMeasure">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="text">
              <string>New</string>
@@ -661,8 +683,8 @@
            <widget class="QLabel" name="labelCurrentSealType">
             <property name="minimumSize">
              <size>
-              <width>200</width>
-              <height>0</height>
+              <width>180</width>
+              <height>50</height>
              </size>
             </property>
             <property name="font">
@@ -685,8 +707,8 @@
            <widget class="QLabel" name="labelCurrentTime">
             <property name="minimumSize">
              <size>
-              <width>210</width>
-              <height>0</height>
+              <width>180</width>
+              <height>50</height>
              </size>
             </property>
             <property name="font">
@@ -707,11 +729,11 @@
           </item>
           <item>
            <widget class="QPushButton" name="buttonSaveMeasure">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="text">
              <string>Save</string>
@@ -720,11 +742,11 @@
           </item>
           <item>
            <widget class="QPushButton" name="buttonCancelMeasure">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>50</height>
-             </size>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
             </property>
             <property name="text">
              <string>Cancel</string>
