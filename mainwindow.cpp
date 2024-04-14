@@ -17,7 +17,6 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    setWindowTitle(QString("%1 - %2 %3").arg(QApplication::applicationName(), __DATE__, __TIME__));
 
     on_buttonSetZeroX_clicked();
 
@@ -28,14 +27,18 @@ MainWindow::MainWindow(QWidget *parent)
     setPointsTitles(widgetsPointsP6, Globals::pointsP6Titles);
     setPointsTitles(widgetsPointsP7, Globals::pointsP7Titles);
     ui->comboNewSealType->addItems(Globals::titlesSeals);
-    ui->comboNewSealType->view()->
 
     Settings::load();
 
+    connect(&timerRefreshCoordX, &QTimer::timeout, this, &MainWindow::slot_timerRefreshCoordX_timeout);
+}
+
+
+void MainWindow::showEvent(QShowEvent *)
+{
     setCamera(QString());
     setSerialPort(QString());
 
-    connect(&timerRefreshCoordX, &QTimer::timeout, this, &MainWindow::slot_timerRefreshCoordX_timeout);
     timerRefreshCoordX.start(500);
 }
 
@@ -43,6 +46,34 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    if (ui->frameNewMeasure->isEnabled())
+    {
+        event->accept();
+        return;
+    }
+
+    on_buttonCancelMeasure_clicked();
+
+    if (ui->frameNewMeasure->isEnabled())
+    {
+        event->accept();
+        return;
+    }
+
+    event->ignore();
+}
+
+
+void MainWindow::hideEvent(QHideEvent *)
+{
+    timerRefreshCoordX.stop();
+    m_camera->stop();
+    m_serialport->close();
 }
 
 
@@ -281,47 +312,14 @@ void MainWindow::on_buttonCancelMeasure_clicked()
 }
 
 
-void MainWindow::closeEvent(QCloseEvent *event)
-{
-    if (ui->frameNewMeasure->isEnabled())
-    {
-        event->accept();
-        return;
-    }
-
-    on_buttonCancelMeasure_clicked();
-
-    if (ui->frameNewMeasure->isEnabled())
-    {
-        event->accept();
-        return;
-    }
-
-    event->ignore();
-}
-
-
-void MainWindow::on_buttonHistory_clicked()
-{
-    QScopedPointer<DialogHistory> dialog(new DialogHistory());
-    dialog->exec();
-}
-
-
-void MainWindow::on_buttonSettings_clicked()
-{
-    QScopedPointer<DialogSettings> dialog(new DialogSettings());
-    connect(dialog.data(), &QDialog::accepted, this, &MainWindow::slot_dialogSettings_accepted);
-    dialog->exec();
-}
-
-
 void MainWindow::slot_dialogSettings_accepted()
 {
     auto dialog = qobject_cast<DialogSettings*>(sender());
     Settings::save();
 
+    if (! isVisible())
+        return;
+
     setCamera(dialog->getCameraDeviceName());
     setSerialPort(dialog->getSerialPortName());
 }
-

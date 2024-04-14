@@ -16,6 +16,7 @@ SOURCES += \
     globals.cpp \
     main.cpp \
     mainwindow.cpp \
+    modeselectionwindow.cpp \
     pointdata.cpp \
     pointrange.cpp \
     settings.cpp
@@ -27,6 +28,7 @@ HEADERS += \
     formrange.h \
     globals.h \
     mainwindow.h \
+    modeselectionwindow.h \
     pointdata.h \
     pointrange.h \
     settings.h
@@ -36,7 +38,8 @@ FORMS += \
     dialogsettings.ui \
     formpoint.ui \
     formrange.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    modeselectionwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

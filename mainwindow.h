@@ -24,22 +24,24 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-    void closeEvent(QCloseEvent *event) override;
-
     static double getCurrentCoordX();
 
+public slots:
+    void slot_dialogSettings_accepted();
+
 private slots:
-    void on_buttonHistory_clicked();
     void on_buttonSetZeroX_clicked();
     void on_buttonNewMeasure_clicked();
     void on_buttonSaveMeasure_clicked();
     void on_buttonCancelMeasure_clicked();
-    void on_buttonSettings_clicked();
-    void slot_dialogSettings_accepted();
     void slot_timerRefreshCoordX_timeout();
     void slot_serialPort_readyRead();
 
 private:
+    void closeEvent(QCloseEvent *event) override;
+    void showEvent(QShowEvent *) override;
+    void hideEvent(QHideEvent *)  override;
+
     Ui::MainWindow *ui;
     QTimer timerRefreshCoordX;
     QList<FormPoint*> widgetsPointsP6;
