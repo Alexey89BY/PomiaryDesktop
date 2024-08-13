@@ -452,7 +452,7 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QCameraViewfinder" name="widgetViewFinder" native="true"/>
+         <widget class="QGridCameraViewfinder" name="widgetViewFinder" native="true"/>
         </item>
        </layout>
       </widget>
@@ -496,7 +496,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="labelCurrentOperator">
+        <widget class="QLineEdit" name="editCurrentOperator">
          <property name="sizePolicy">
           <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
            <horstretch>0</horstretch>
@@ -514,11 +514,11 @@
            <pointsize>11</pointsize>
           </font>
          </property>
-         <property name="frameShape">
-          <enum>QFrame::Box</enum>
-         </property>
          <property name="text">
           <string>ALIAKSEI PROKHARAU 02C06</string>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -714,6 +714,35 @@
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Hole size</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QSpinBox" name="spinHoleSize">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="suffix">
+          <string> px</string>
+         </property>
+         <property name="minimum">
+          <number>100</number>
+         </property>
+         <property name="maximum">
+          <number>500</number>
+         </property>
+         <property name="value">
+          <number>157</number>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QFrame" name="frame_6">
          <property name="frameShape">
           <enum>QFrame::VLine</enum>
@@ -737,9 +766,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QCameraViewfinder</class>
+   <class>QGridCameraViewfinder</class>
    <extends>QWidget</extends>
-   <header>qcameraviewfinder.h</header>
+   <header>qgridcameraviewfinder.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

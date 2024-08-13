@@ -19,7 +19,8 @@ SOURCES += \
     modeselectionwindow.cpp \
     pointdata.cpp \
     pointrange.cpp \
-    settings.cpp
+    settings.cpp \
+    qgridcameraviewfinder.cpp
 
 HEADERS += \
     dialoghistory.h \
@@ -31,7 +32,8 @@ HEADERS += \
     modeselectionwindow.h \
     pointdata.h \
     pointrange.h \
-    settings.h
+    settings.h \
+    qgridcameraviewfinder.h
 
 FORMS += \
     dialoghistory.ui \

@@ -7,7 +7,7 @@
 #include <QCamera>
 #include <QCloseEvent>
 #include <QScopedPointer>
-#include <QSerialPort>
+#include <QtSerialPort/QSerialPort>
 #include "formpoint.h"
 #include "pointrange.h"
 
@@ -36,6 +36,8 @@ private slots:
     void on_buttonCancelMeasure_clicked();
     void slot_timerRefreshCoordX_timeout();
     void slot_serialPort_readyRead();
+
+    void on_spinHoleSize_valueChanged(int arg1);
 
 private:
     void closeEvent(QCloseEvent *event) override;

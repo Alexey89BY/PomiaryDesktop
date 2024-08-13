@@ -19,6 +19,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
 
     on_buttonSetZeroX_clicked();
+    on_spinHoleSize_valueChanged(ui->spinHoleSize->value());
 
     widgetsPointsP6 << ui->widgetPointP6_1 << ui->widgetPointP6_2 << ui->widgetPointP6_3 << ui->widgetPointP6_4 << ui->widgetPointP6_5
                     << ui->widgetPointP6_6 << ui->widgetPointP6_7 << ui->widgetPointP6_8 << ui->widgetPointP6_9 << ui->widgetPointP6_10;
@@ -281,7 +282,7 @@ void MainWindow::on_buttonSaveMeasure_clicked()
     appendPointsToList(pointsData, widgetsPointsP7);
 
     if (! DialogHistory::appendToHistory(ui->comboNewSealType->currentIndex(),
-                                        ui->labelCurrentTime->text(), ui->labelCurrentOperator->text(), pointsData))
+                                        ui->labelCurrentTime->text(), ui->editCurrentOperator->text(), pointsData))
     {
         QMessageBox::critical(this, windowTitle(), tr("Unable to save measures!"));
         return;
@@ -323,3 +324,10 @@ void MainWindow::slot_dialogSettings_accepted()
     setCamera(dialog->getCameraDeviceName());
     setSerialPort(dialog->getSerialPortName());
 }
+
+
+void MainWindow::on_spinHoleSize_valueChanged(int arg1)
+{
+    ui->widgetViewFinder->setTargetSize(arg1);
+}
+
