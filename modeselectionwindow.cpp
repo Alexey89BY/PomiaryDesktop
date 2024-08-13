@@ -4,10 +4,12 @@
 #include "dialogsettings.h"
 #include "dialoghistory.h"
 #include "mainwindow.h"
+#include "windowanalyse.h"
 
 
 static QScopedPointer<DialogHistory> dialogHistory;
 static QScopedPointer<MainWindow> mainWindow;
+static QScopedPointer<WindowAnalyse> windowAnalyse;
 
 
 ModeSelectionWindow::ModeSelectionWindow(QWidget *parent)
@@ -19,10 +21,15 @@ ModeSelectionWindow::ModeSelectionWindow(QWidget *parent)
 
     mainWindow.reset(new MainWindow());
     dialogHistory.reset(new DialogHistory());
+    windowAnalyse.reset(new WindowAnalyse());
 }
 
 ModeSelectionWindow::~ModeSelectionWindow()
 {
+    mainWindow.reset(nullptr);
+    dialogHistory.reset(nullptr);
+    windowAnalyse.reset(nullptr);
+
     delete ui;
 }
 
@@ -49,6 +56,6 @@ void ModeSelectionWindow::on_buttonHistory_clicked()
 
 void ModeSelectionWindow::on_buttonAnalyse_clicked()
 {
-
+    windowAnalyse->show();
 }
 

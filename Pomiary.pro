@@ -1,4 +1,4 @@
-QT       += core gui multimedia multimediawidgets serialport
+QT       += core gui multimedia multimediawidgets serialport printsupport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,7 +20,8 @@ SOURCES += \
     pointdata.cpp \
     pointrange.cpp \
     settings.cpp \
-    qgridcameraviewfinder.cpp
+    qgridcameraviewfinder.cpp \
+    windowanalyse.cpp
 
 HEADERS += \
     dialoghistory.h \
@@ -33,7 +34,8 @@ HEADERS += \
     pointdata.h \
     pointrange.h \
     settings.h \
-    qgridcameraviewfinder.h
+    qgridcameraviewfinder.h \
+    windowanalyse.h
 
 FORMS += \
     dialoghistory.ui \
@@ -41,7 +43,8 @@ FORMS += \
     formpoint.ui \
     formrange.ui \
     mainwindow.ui \
-    modeselectionwindow.ui
+    modeselectionwindow.ui \
+    windowanalyse.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -4,10 +4,6 @@
 #include <cmath>
 
 
-const auto roundFactor = 0.1;
-const auto errorEpsilon = roundFactor / 2;
-
-
 FormPoint::FormPoint(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::FormPoint)
@@ -62,18 +58,12 @@ PointData const& FormPoint::getPointData() const
 }
 
 
-static bool isValidPoint(PointRange const& range, double value)
-{
-    return ((std::abs(value - range.m_zero) - range.m_error) < errorEpsilon);
-}
-
-
 void FormPoint::on_buttonSetCoord_clicked()
 {
     auto coordX = std::abs(MainWindow::getCurrentCoordX());
 
-    pointData.m_value = round(coordX / roundFactor) * roundFactor;
-    pointData.m_isValid = isValidPoint(pointRange, pointData.m_value);
+    pointData.m_value = round(coordX / PointRange::roundFactor) * PointRange::roundFactor;
+    pointData.m_isValid = pointRange.isValidPoint(pointData.m_value);
     pointData.m_isSetted = true;
 
     ui->labelCoord->setText(QString::number(pointData.m_value, 'f', 1));
