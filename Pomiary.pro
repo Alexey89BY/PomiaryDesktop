@@ -13,6 +13,7 @@ SOURCES += \
     dialogsettings.cpp \
     formpoint.cpp \
     formrange.cpp \
+    framezoom.cpp \
     globals.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     dialogsettings.h \
     formpoint.h \
     formrange.h \
+    framezoom.h \
     globals.h \
     mainwindow.h \
     modeselectionwindow.h \

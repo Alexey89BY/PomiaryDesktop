@@ -452,7 +452,24 @@
          <number>0</number>
         </property>
         <item>
-         <widget class="QGridCameraViewfinder" name="widgetViewFinder" native="true"/>
+         <widget class="FrameZoom" name="frameViewFinder">
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QGridCameraViewfinder" name="widgetViewFinder" native="true">
+           <property name="geometry">
+            <rect>
+             <x>-360</x>
+             <y>60</y>
+             <width>1256</width>
+             <height>757</height>
+            </rect>
+           </property>
+          </widget>
+         </widget>
         </item>
        </layout>
       </widget>
@@ -769,6 +786,12 @@
    <class>QGridCameraViewfinder</class>
    <extends>QWidget</extends>
    <header>qgridcameraviewfinder.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>FrameZoom</class>
+   <extends>QFrame</extends>
+   <header>framezoom.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
