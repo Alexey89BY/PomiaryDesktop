@@ -548,7 +548,7 @@ void WindowAnalyse::drawData(QPainter &painter, QRect const &paintRect, int inde
             drawText(painter, QPoint(x0, y), Qt::AlignTop | Qt::AlignHCenter, QString("%1\n%2 \u00b1 %3\n%4 \u00b1 %5")
                                                                                   .arg(titles->at(rangeIndex))
                                                                                   .arg(range.m_zero, 0, 'f', 1).arg(range.m_error, 0, 'f', 1)
-                                                                                  .arg(pointsAverage, 0, 'f', 1).arg(pointsStdev, 0, 'f', 1));
+                                                                                  .arg(pointsAverage, 0, 'f', 2).arg(pointsStdev, 0, 'f', 2));
 
             const int colsRangeNumber = ui->spinHistogramColumns->value();
 
@@ -725,7 +725,7 @@ void WindowAnalyse::drawData(QPainter &painter, QRect const &paintRect, int inde
             // draw row header
             auto xv = x + colWidth;
 
-            drawText(painter, QPoint(xv, y0), Qt::AlignVCenter | Qt::AlignRight, QString("%1\n\u00B1 %2").arg(averageValue, 0, 'f', 1).arg(stdevValue, 0, 'f', 1));
+            drawText(painter, QPoint(xv, y0), Qt::AlignVCenter | Qt::AlignRight, QString("%1\n\u00B1 %2").arg(averageValue, 0, 'f', 2).arg(stdevValue, 0, 'f', 2));
 
             // draw rows
             for (auto rowIndex = 0; rowIndex < values.count(); ++rowIndex)
