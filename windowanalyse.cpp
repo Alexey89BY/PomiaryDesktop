@@ -126,8 +126,7 @@ static double decodeValue(QStringList const &textValues, int index)
 void WindowAnalyse::filterData(QString const & pointsModel, QString const & pointsSide, QVector<QPair<int,int>> const & pointsMap,
                                QVector<QString> & pointsTimeStamps,
                                QVector<QVector<double>> & pointsVectors,
-                               QVector<double> & pointsAverages,
-                               QVector<double> & pointsStdevs)
+                               QVector<POINT_STAT> & pointsStats)
 {
     QList<int> filterMap;
     if (ui->comboTimestamp->currentIndex() >= 0)
@@ -160,8 +159,7 @@ void WindowAnalyse::filterData(QString const & pointsModel, QString const & poin
     auto valuesCount = pointsMap.count();
 
     pointsVectors.resize(valuesCount);
-    pointsAverages.resize(valuesCount);
-    pointsStdevs.resize(valuesCount);
+    pointsStats.resize(valuesCount);
 
     for (int colIndex = 0; colIndex < valuesCount; ++colIndex)
     {
@@ -206,8 +204,8 @@ void WindowAnalyse::filterData(QString const & pointsModel, QString const & poin
             stdevValue = sigmaScale * qSqrt(stdevSum / (values.count() - 1));
         }
 
-        pointsAverages[colIndex] = averageValue;
-        pointsStdevs[colIndex] = stdevValue;
+        pointsStats[colIndex].average = averageValue;
+        pointsStats[colIndex].stdev = stdevValue;
         pointsVectors[colIndex] = values;
     }
 }
@@ -502,10 +500,9 @@ void WindowAnalyse::drawData(QPainter &painter, QRect const &paintRect, int inde
 
     QVector<QString> pointsTimeStamps;
     QVector<QVector<double>> pointsVectors;
-    QVector<double> pointsAverages;
-    QVector<double> pointsStdevs;
+    QVector<POINT_STAT> pointsStats;
 
-    filterData(pointsModel, pointsSide, *valuesMap, pointsTimeStamps, pointsVectors, pointsAverages, pointsStdevs);
+    filterData(pointsModel, pointsSide, *valuesMap, pointsTimeStamps, pointsVectors, pointsStats);
 
     const auto tableTop = paintRect.top() + 5.0;
     const auto tableLeft = paintRect.left() + 5.0;
@@ -545,8 +542,8 @@ void WindowAnalyse::drawData(QPainter &painter, QRect const &paintRect, int inde
 
             auto x0 = x + cellWidth * 0.5;
             auto const & range = ranges->at(rangeIndex);
-            auto const & pointsAverage = pointsAverages.at(rangeIndex);
-            auto const & pointsStdev = pointsStdevs.at(rangeIndex);
+            auto const & pointsAverage = pointsStats.at(rangeIndex).average;
+            auto const & pointsStdev = pointsStats.at(rangeIndex).stdev;
 
             drawText(painter, QPoint(x0, y), Qt::AlignTop | Qt::AlignHCenter, QString("%1\n%2 \u00b1 %3\n%4 \u00b1 %5")
                                                                                   .arg(titles->at(rangeIndex))
@@ -715,8 +712,8 @@ void WindowAnalyse::drawData(QPainter &painter, QRect const &paintRect, int inde
             drawRangeText(painter, x0, y0, scale, range);
 
             auto values = pointsVectors.at(colIndex);
-            auto averageValue = pointsAverages.at(colIndex);
-            auto stdevValue = pointsStdevs.at(colIndex);
+            auto averageValue = pointsStats.at(colIndex).average;
+            auto stdevValue = pointsStats.at(colIndex).stdev;
 
             if (values.count())
             {

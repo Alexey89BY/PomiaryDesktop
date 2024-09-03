@@ -43,6 +43,12 @@ private slots:
     void on_checkDrawColoredRanges_stateChanged(int arg1);
 
 private:
+    struct POINT_STAT
+    {
+        double average;
+        double stdev;
+    };
+
     Ui::WindowAnalyse *ui;
 
     QString defaultTitle;
@@ -51,8 +57,8 @@ private:
     void filterData(QString const & pointsModel, QString const & pointsSide, QVector<QPair<int,int>> const & pointsMap,
                     QVector<QString> & pointsTimeStamps,
                     QVector<QVector<double>> & pointsVectors,
-                    QVector<double> & pointsAverages,
-                    QVector<double> & pointsStdev);
+                    QVector<struct POINT_STAT> & pointsStats);
+
     void drawData(QPainter &painter, QRect const &paintRect, int indexModel, int indexSide, int indexProfile, int indexProcess);
     void refreshData();
     void autoPrint();
