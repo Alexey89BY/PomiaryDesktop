@@ -390,11 +390,11 @@ void WindowAnalyse::drawData(QPainter &painter, QRect const &paintRect, int inde
     static QVector<QPair<int, int>> const mapCuttingMaxiP7 {{35,32},{33,32},{34,33},{35,34}};
     static QVector<QPair<int, int>> const mapCuttingMaxiP6 {{29,19},{20,19},{21,20},{22,21},{23,22},{24,23},{25,24},{26,25},{27,26},{28,27},{29,28}};
 
-    static QVector<QPair<int, int>> const mapMoldingsStandardP7 {{28,27},{32,31}};
-    static QVector<QPair<int, int>> const mapMoldingsStandardP6 {{26,25}};
+    static QVector<QPair<int, int>> const mapMoldingsStandardP7 {{28,27},{31,27},{28,27},{32,31}};
+    static QVector<QPair<int, int>> const mapMoldingsStandardP6 {{25,17},{26,25}};
 
-    static QVector<QPair<int, int>> const mapMoldingsMaxiP7 {{32,31},{36,35}};
-    static QVector<QPair<int, int>> const mapMoldingsMaxiP6 {{30,29}};
+    static QVector<QPair<int, int>> const mapMoldingsMaxiP7 {{32,31},{35,31},{32,31},{36,35}};
+    static QVector<QPair<int, int>> const mapMoldingsMaxiP6 {{29,19},{30,29}};
 
     QString pointsModel = ui->comboModel->itemText(indexModel);
     QString pointsSide = ui->comboSide->itemText(indexSide);

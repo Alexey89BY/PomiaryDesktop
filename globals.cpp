@@ -34,7 +34,7 @@ void Globals::init()
 
     // Sill seal
     rangesMaxiPointsP6 << PointRange(14, 1.5) << PointRange(116, 2.5) << PointRange(218, 2.5) << PointRange(320, 2.5) << PointRange(422, 2.5)
-                       << PointRange(524, 2.5) << PointRange(626, 2.5) << PointRange(728, 3) << PointRange(830, 2.5) << PointRange(842.5, 3);
+                       << PointRange(524, 2.5) << PointRange(626, 2.5) << PointRange(728, 3) << PointRange(830, 2.5) << PointRange(839.5, 3);
 
     rangesMaxiPointsP7 << PointRange(22.5, 1.5) << PointRange(107.5, 2.5) << PointRange(130.5, 2.5);
 
@@ -79,21 +79,29 @@ void Globals::init()
 
     // Moldings
 
-    moldingsStandardP6Titles << "M6";
+    moldingsStandardP6Titles    << "P6 Profil (M6)"
+                                << "Molding M6 (P6)";
 
-    rangesStandardMoldingsP6 << PointRange(2.0, 1.0);
+    rangesStandardMoldingsP6    << PointRange(653.0, 2.5)
+                                << PointRange(2.0, 1.0);
 
-    moldingsStandardP7Titles << "M6" << "M7";
+    moldingsStandardP7Titles    << "P7 Profil (M6)" << "P7 Profil (M7)"
+                                << "Molding M6 (P7)" << "Molding M7 (P7)";
 
-    rangesStandardMoldingsP7 << PointRange(3.0, 1.0) << PointRange(3.5, 1.0);
+    rangesStandardMoldingsP7    << PointRange(3.0, 1.0) << PointRange(145.5, 2.5)
+                                << PointRange(3.0, 1.0) << PointRange(3.5, 1.0);
 
-    moldingsMaxiP6Titles << "M8";
+    moldingsMaxiP6Titles    << "P6 Profil (M8)"
+                            << "Molding M8 (P6)";
 
-    rangesMaxiMoldingsP6 << PointRange(2.5, 1.0);
+    rangesMaxiMoldingsP6    << PointRange(837.0, 2.5)
+                            << PointRange(2.5, 1.0);
 
-    moldingsMaxiP7Titles << "M8" << "M9";
+    moldingsMaxiP7Titles    << "P7 Profil (M8)" << "P7 Profil (M9)"
+                            << "Molding M8 (P7)" << "Molding M9 (P7)";
 
-    rangesMaxiMoldingsP7 << PointRange(3.0, 1.0) << PointRange(4.5, 1.0);
+    rangesMaxiMoldingsP7    << PointRange(3.0, 1.0) << PointRange(126.0, 2.5)
+                            << PointRange(3.0, 1.0) << PointRange(4.5, 1.0);
 }
 
 
